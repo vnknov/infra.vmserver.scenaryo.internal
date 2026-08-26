@@ -1,0 +1,29 @@
+# Obsidian Web GUI
+https://vmserver.scenaryo.internal:3000 {
+    tls /certs/server.crt /certs/server.key
+
+    reverse_proxy obsidian:3000
+}
+
+# Obsidian REST API / MCP
+#https://thinkstationpgx-d37b.local:27124 {
+#    tls /certs/server.crt /certs/server.key#
+#
+#    reverse_proxy obsidian:27123
+#}
+
+https://vmserver.scenaryo.internal:27124 {
+    tls /certs/server.crt /certs/server.key
+
+    reverse_proxy https://obsidian:27124 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
+}
+
+vmserver.scenaryo.internal:3002 {
+    tls /certs/server.crt /certs/server.key
+
+    reverse_proxy http://n8n:5678
+}

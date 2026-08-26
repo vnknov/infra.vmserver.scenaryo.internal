@@ -1,0 +1,30 @@
+services:
+  caddy:
+    image: caddy:2
+    container_name: vmserver-caddy
+
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"       # HTTPS OBSIDIAN GUI
+      - "27124:27124"     # HTTPS OBSIDIAN REST API / MCP
+      - "3002:3002"       # HTTPS N8N GUI
+
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./../certs/local-ca/vmserver.crt:/certs/server.crt:ro
+      - ./../certs/local-ca/vmserver.key:/certs/server.key:ro
+
+      - caddy_data:/data
+      - caddy_config:/config
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  caddy_data:
+  caddy_config:
