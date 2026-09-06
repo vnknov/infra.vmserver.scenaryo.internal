@@ -9,6 +9,7 @@ services:
       - "3000:3000"       # HTTPS OBSIDIAN GUI
       - "27124:27124"     # HTTPS OBSIDIAN REST API / MCP
       - "3002:3002"       # HTTPS N8N GUI
+      - "3003:3003"       # HTTPS PAPERLESS GUI
 
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro

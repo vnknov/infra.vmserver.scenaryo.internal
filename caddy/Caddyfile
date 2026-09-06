@@ -27,3 +27,9 @@ vmserver.scenaryo.internal:3002 {
 
     reverse_proxy http://n8n:5678
 }
+
+vmserver.scenaryo.internal:3003 {
+    tls /certs/server.crt /certs/server.key
+
+    reverse_proxy http://paperless:8000
+}
